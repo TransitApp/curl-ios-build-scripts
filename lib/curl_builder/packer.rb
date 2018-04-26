@@ -22,9 +22,7 @@ module CurlBuilder
 
       osx = setup(:osx_sdk_version) != "none" ? compiled_architectures.select { |arch| arch.match(/^x86_64/) } : []
       ios = compiled_architectures - osx
-      arm = ios.select { |arch| arch.match(/^arm/) }
-      arm64 = ios.select { |arch| arch.match(/^arm64/) }
- 
+
       successful = {}
 
       if create_binary_for osx, "osx"
@@ -32,18 +30,9 @@ module CurlBuilder
         copy_include_dir osx.first, "osx"
       end
 
-      if create_binary_for ios, "ios-dev"
-        successful["ios-dev"] = ios
-        copy_include_dir ios.first, "ios-dev"
-      end
-
-      if create_binary_for arm, "ios-appstore"
-        successful["ios-appstore"] = arm 
-        copy_include_dir arm.first, "ios-appstore"
-      end
-
-      if arm64.count > 0
-        copy_include_dir arm64.first, "ios64-dev"
+      if create_binary_for ios, "ios"
+        successful["ios"] = ios
+        copy_include_dir ios.first, "ios"
       end
 
       successful
@@ -67,7 +56,7 @@ module CurlBuilder
       return if archs.empty? || archs.nil?
 
       info {
-        "Creating binary #{archs.size > 1 ? "with combined architectures" : "for architecture"} " + 
+        "Creating binary #{archs.size > 1 ? "with combined architectures" : "for architecture"} " +
           "#{param(archs.join(", "))} (#{name})..."
       }
 
