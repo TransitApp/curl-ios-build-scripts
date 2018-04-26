@@ -34,7 +34,7 @@ module CurlBuilder
     "http"   => true,
     "rtsp"   => false,
     "ftp"    => false,
-    "file"   => false,
+    "file"   => true,
     "ldap"   => false,
     "ldaps"  => false,
     "dict"   => false,
