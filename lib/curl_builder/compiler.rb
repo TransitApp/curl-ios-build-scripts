@@ -141,6 +141,7 @@ module CurlBuilder
         --host=#{host}
         --disable-shared
         --enable-static
+        --without-libidn2
         #{flags.join(" ")}
         --prefix="#{output_dir_for architecture}"
       }
