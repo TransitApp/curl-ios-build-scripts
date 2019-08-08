@@ -43,7 +43,9 @@ module CurlBuilder
     "pop3"   => false,
     "imap"   => false,
     "smtp"   => false,
-    "gopher" => false
+    "gopher" => false,
+    "ntlm"   => false,
+    "ntlm-wb"=> false,
   }
 
   DEFAULT_FLAGS = {
@@ -56,23 +58,24 @@ module CurlBuilder
   }
 
   DEFAULT_SETUP = {
-    log_level:          "info", # debug, info, warn, error
-    verbose:            false,
-    debug_symbols:      false,
-    curldebug:          false,
-    sdk_version:        "9.3",
-    osx_sdk_version:    "10.11",
-    libcurl_version:    "7.49.1",
-    architectures:      %w(i386 armv7 armv7s arm64 x86_64),
-    xcode_home:         "/Applications/Xcode.app/Contents/Developer",
-    run_on_dir:         Dir::pwd,
-    work_dir:           "build",
-    result_dir:         "curl",
-    clean_and_exit:     false,
-    cleanup:            true,
+    log_level:           "info", # debug, info, warn, error
+    verbose:             false,
+    debug_symbols:       false,
+    curldebug:           false,
+    sdk_version:         "9.3",
+    watshos_sdk_version: "5.3",
+    osx_sdk_version:     "10.11",
+    libcurl_version:     "7.49.1",
+    architectures:       %w(i386 armv7 armv7s armv7k arm64 x86_64),
+    xcode_home:          "/Applications/Xcode.app/Contents/Developer",
+    run_on_dir:          Dir::pwd,
+    work_dir:            "build",
+    result_dir:          "curl",
+    clean_and_exit:      false,
+    cleanup:             true,
   }
 
-  VALID_ARGS = {architectures: %w(i386 armv7 armv7s arm64 x86_64)}
+  VALID_ARGS = {architectures: %w(i386 armv7 armv7s armv7k arm64 x86_64)}
 
 
   attr_accessor :logger

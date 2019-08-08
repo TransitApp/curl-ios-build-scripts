@@ -61,7 +61,7 @@ module CurlBuilder
 
         parser.on("--archs X,Y,Z",
                   Array,
-                  "Which architectures to compile for (i386, armv6, armv7 and/or armv7s)",
+                  "Which architectures to compile for (i386, armv6, armv7, armv7k and/or armv7s)",
                   "  Defaults to #{param(setup[:architectures].join(","))}") do |archs|
           # filter out unknown architectures to avoid build errors...
           setup[:architectures] = CurlBuilder.filter_valid_archs(archs)
@@ -95,6 +95,12 @@ module CurlBuilder
                   "Use specific SDK version",
                   "  Defaults to #{param(setup[:osx_sdk_version])}") do |sdk|
           setup[:osx_sdk_version] = sdk
+        end
+
+        parser.on("--watchos-sdk-version SDK",
+                  "Use specific SDK version",
+                  "  Defaults to #{param(setup[:watchos_sdk_version])}") do |sdk|
+          setup[:watchos_sdk_version] = sdk
         end
 
         parser.on("--log-level LOG_LEVEL",

@@ -1,2 +1,1 @@
-
-./build_curl --sdk-version 11.3 --osx-sdk-version none --libcurl-version 7.58.0 --verbose
+./build_curl --sdk-version 12.4 --osx-sdk-version none --watchos-sdk-version 5.3 --libcurl-version 7.58.0

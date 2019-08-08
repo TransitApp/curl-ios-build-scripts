@@ -60,6 +60,8 @@ module CurlBuilder
         setup(:osx_sdk_version) == "none" ? "iPhoneSimulator" : "MacOSX"
       when "i386"
         "iPhoneSimulator"
+      when "armv7k"
+        "WatchOS"
       else
         "iPhoneOS"
       end
@@ -86,6 +88,8 @@ module CurlBuilder
     def sdk_version_for(platform)
       if platform == "iPhoneOS" || platform == "iPhoneSimulator"
         setup(:sdk_version)
+      elsif platform == "WatchOS"
+        setup(:watchos_sdk_version)
       else
         setup(:osx_sdk_version)
       end
@@ -98,6 +102,9 @@ module CurlBuilder
       elsif platform == "iPhoneOS"
         version = "9.0"
         min_version = "-miphoneos-version-min=#{version}"
+      elsif platform == "WatchOS"
+        version = "5.3"
+        min_version = "-mwatchos-simulator-version-min=#{version}"
       else
         min_version = "-mmacosx-version-min=10.8"
       end
