@@ -59,8 +59,10 @@ module CurlBuilder
       when "x86_64"
         setup(:osx_sdk_version) == "none" ? "iPhoneSimulator" : "MacOSX"
       when "i386"
-        "iPhoneSimulator"
+        setup(:sdk_version) == "none" ? "WatchSimulator" : "iPhoneSimulator"
       when "armv7k"
+        "WatchOS"
+    when "arm64_32"
         "WatchOS"
       else
         "iPhoneOS"
@@ -88,7 +90,7 @@ module CurlBuilder
     def sdk_version_for(platform)
       if platform == "iPhoneOS" || platform == "iPhoneSimulator"
         setup(:sdk_version)
-      elsif platform == "WatchOS"
+      elsif platform == "WatchOS" || platform == "WatchSimulator"
         setup(:watchos_sdk_version)
       else
         setup(:osx_sdk_version)
@@ -103,6 +105,9 @@ module CurlBuilder
         version = "9.0"
         min_version = "-miphoneos-version-min=#{version}"
       elsif platform == "WatchOS"
+        version = "5.3"
+        min_version = "-mwatchos-version-min=#{version}"
+      elsif platform == "WatchSimulator"
         version = "5.3"
         min_version = "-mwatchos-simulator-version-min=#{version}"
       else
@@ -133,7 +138,7 @@ module CurlBuilder
     end
 
     def configure(architecture, tools, compilation_flags)
-      host = (architecture != "arm64" ? architecture : "arm") << "-apple-darwin"
+      host = (architecture != "arm64" && architecture != "arm64_32" ? architecture : "arm") << "-apple-darwin"
 
       flags  = CurlBuilder.build_flags(configuration[:flags])
       flags += CurlBuilder.build_protocols(configuration[:protocols])

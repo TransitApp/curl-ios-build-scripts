@@ -66,7 +66,7 @@ module CurlBuilder
     watshos_sdk_version: "5.3",
     osx_sdk_version:     "10.11",
     libcurl_version:     "7.49.1",
-    architectures:       %w(i386 armv7 armv7s armv7k arm64 x86_64),
+    architectures:       %w(i386 armv7 armv7s arm64 x86_64 armv7k arm64_32),
     xcode_home:          "/Applications/Xcode.app/Contents/Developer",
     run_on_dir:          Dir::pwd,
     work_dir:            "build",
@@ -75,7 +75,7 @@ module CurlBuilder
     cleanup:             true,
   }
 
-  VALID_ARGS = {architectures: %w(i386 armv7 armv7s armv7k arm64 x86_64)}
+  VALID_ARGS = {architectures: %w(i386 armv7 armv7s armv7k arm64 arm64_32 x86_64)}
 
 
   attr_accessor :logger
